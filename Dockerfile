@@ -51,5 +51,5 @@ RUN echo "#!bin/bash\n /rl-server/start-angband.sh" >> /home/player/.ssh/rc
 # Expose ssh port
 EXPOSE 22
     
-# Startup commands -> startup with docker run -d --name cname -p 2222:22 image then ssh player@localhost -p 2222
+# When the container starts, startup sshd
 CMD ["/usr/sbin/sshd", "-D"]
