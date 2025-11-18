@@ -48,6 +48,12 @@ RUN apt-get install -y crawl
 RUN echo "#!/bin/bash\n /usr/games/crawl" > /rl-server/start-crawl.sh && \
     chmod +x /rl-server/start-crawl.sh
 
+# Install cdda, create startup script for it
+RUN apt-get install -y cataclysm-dda-curses
+
+RUN echo "#!/bin/bash\n /usr/games/cataclysm" > /rl-server/start-cataclysm.sh && \
+    chmod +x /rl-server/start-cataclysm.sh
+
 # Setup default player account, ssh settings, and login scripts
 RUN useradd -m -s /bin/bash player
 
