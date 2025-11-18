@@ -1,0 +1,11 @@
+
+Welcome to rl-server!
+---------------------
+
+Use `play` when you login to play one of the available roguelikes!
+
+Example:
+    $ play angband
+
+Run `play` without any arguments to see a full list of supported roguelikes.
+

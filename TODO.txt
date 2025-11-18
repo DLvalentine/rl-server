@@ -1,4 +1,2 @@
-- Player management (e.g. multi-user)
-- More robust player login script
-- COPY command to copy over some scripts (e.g. start-angband.sh) to make Dockerfile neater
-- temp/perm root access for my management
+- Player management / menus
+- Move inline scripts into /scripts, maybe. Like a game setup script for example, to setup all of em

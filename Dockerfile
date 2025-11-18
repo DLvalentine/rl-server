@@ -30,13 +30,16 @@ RUN echo "export LANG=en_US.UTF-8" > /etc/profile.d/lang_export.sh && \
 RUN echo "alias play='/home/player/play.sh'" >> /etc/profile.d/play_alias.sh
 RUN echo "alias p='play'" >> /etc/profile.d/play_alias.sh
 
-# Install curses
+# Set MOTD (all users)
+COPY etc/motd.txt /etc/motd
+
+############################# Games Setup ############################################
+
+# Install curses, used by various games
 RUN apt-get update && \
     apt-get install -y \
     libncurses5-dev \
     libncursesw5-dev
-
-############################# Games Setup ############################################
 
 # Install angband, create startup script for it
 RUN echo "deb http://deb.debian.org/debian stable main" > /etc/apt/sources.list.d/stable.list && \
