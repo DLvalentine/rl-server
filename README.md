@@ -33,6 +33,14 @@ This will spin up a container with this image and run the startup commands. Once
 
 That will connect to the container, and prompt you for a password. `player` is the dev password at time of writing, since we only have one user and no user management so far.
 
+Additionally, if you just need to jump into the container to test things as root, you can run:
+
+```sh
+./root.bat
+```
+
+I use this to test install scripts and things like that, or checking to see which packages I need or don't need, before I add them to the Dockerfile or elsewhere.
+
 When you're done, run:
 
 ```sh
