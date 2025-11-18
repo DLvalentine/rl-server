@@ -1,12 +1,57 @@
 # RL Server
 
 ### What is this?
-TL;DR I'm thinking about making something akin to crawl.akrasiac.org (the ssh login for dcss) for multiple RLs.
 
-I'm going to start by creating a simple Debian image that updates itself and then installs angband, then runs it. Later on, I'd like to add login systems, expose ssh, have a game selection system, that sort of thing. 
+Inspired by one of Dungeon Crawl Stone Soup's ssh servers, `crawl.akrasiac.org`, I wanted to make
+a Docker image to containerize a similar service, allowing users to connect and play from any
+number of free roguelikes installed on it. Like a portable installation of each, accessible
+via the internet and a terminal.
 
-If it all works out on the container, I'll ship that via DigitalOcean or some other chepaer service like Linode.
+### Getting Started
 
-### Stretch goals?
+When this project is complete, you should just be able to ssh to a host and play!
 
-It'd be sick to use tmux or something to have a chat client open for anyone connected to the server.
+But for now, I've provided some scripts so you can build the image and setup a container locally while I work on getting all of this finished up.
+
+To get started, run the following in your terminal (Windows, fight me):
+
+```sh
+./build.bat
+```
+
+This will build the image from the Dockerfile. Once that is done, run:
+
+```sh
+./start.bat
+```
+
+This will spin up a container with this image and run the startup commands. Once that is done, run:
+
+```sh
+./test.bat
+```
+
+That will connect to the container, and prompt you for a password. `player` is the dev password at time of writing, since we only have one user and no user management so far.
+
+When you're done, run:
+
+```sh
+./stop.bat
+```
+This will stop the container, remove it, and will also remove the image, since I prefer to rebuild images when making large changes and got tired of writing out all the commands...or having a dedicated "cleanup" script... again, fight me.
+
+### Notes
+
+Mostly for me:
+
+- `TODO.txt` contains all the TODOs... duh?
+- `etc/` contains things like the MOTD, other static files to copy over
+- `scripts/` contains scripts to copy over
+
+Virtually everything else just lives in the Dockerfile.
+
+### Progress
+
+So far I've installed the "big 3" roguelikes: angband, dcss, and cdda.
+
+I'm pretty happy with that for now, and I have basic ssh stuff working. So next up is user management. After that, I'll see about getting this spun up on the internet somewhere before adding more features.
