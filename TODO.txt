@@ -1,4 +1,4 @@
-- Player management (e.g. multi-tenant)
+- Player management (e.g. multi-user)
 - More robust player login script
 - COPY command to copy over some scripts (e.g. start-angband.sh) to make Dockerfile neater
 - temp/perm root access for my management

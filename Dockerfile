@@ -1,3 +1,4 @@
+# Base image Debian and workdir for server-wide scripts
 FROM debian:stable-slim
 WORKDIR /rl-server
 
@@ -14,10 +15,17 @@ RUN apt-get update && \
     openssh-server
 
 # Set UTF-8 as default locale (system/root)
-RUN sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+RUN sed -i "s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/" /etc/locale.gen && \
     locale-gen
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
+
+# Set UTF-8 as default locale (all users)
+RUN echo "export LANG=en_US.UTF-8" > /etc/profile.d/lang_export.sh && \
+    echo "export LC_ALL=en_US.UTF-8" >> /etc/profile.d/lang_export.sh
+
+# Setup an alias for the play.sh script (all users)
+RUN echo "alias play='/home/player/play.sh'" >> /etc/profile.d/play_alias.sh
 
 # Install curses
 RUN apt-get update && \
@@ -34,7 +42,13 @@ RUN echo "deb http://deb.debian.org/debian stable main" > /etc/apt/sources.list.
 RUN echo "#!/bin/bash\n /usr/games/angband -mgcu" > /rl-server/start-angband.sh && \
     chmod +x /rl-server/start-angband.sh
 
-# Setup default player account, ssh settings, and login script
+# Install crawl, create startup script for it
+RUN apt-get install -y crawl
+
+RUN echo "#!/bin/bash\n /usr/games/crawl" > /rl-server/start-crawl.sh && \
+    chmod +x /rl-server/start-crawl.sh
+
+# Setup default player account, ssh settings, and login scripts
 RUN useradd -m -s /bin/bash player
 
 RUN echo "player:player" | chpasswd
@@ -42,11 +56,11 @@ RUN echo "player:player" | chpasswd
 RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication yes/" /etc/ssh/sshd_config && \
 sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin no/" /etc/ssh/sshd_config
 
-RUN mkdir -p /home/player/.ssh
-RUN touch /home/player/.ssh/rc
-RUN echo "export LANG=en_US.UTF-8" >> /home/player/.ssh/rc
-RUN echo "export LC_ALL=en_US.UTF-8" >> /home/player/.ssh/rc
-RUN echo "#!bin/bash\n /rl-server/start-angband.sh" >> /home/player/.ssh/rc
+COPY scripts/play.sh /home/player/play.sh
+RUN chmod +x /home/player/play.sh
+
+RUN echo "source /etc/profile.d/lang_export.sh" >> /etc/profile
+RUN echo "source /etc/profile.d/play_alias.sh" >> /etc/profile
 
 # Expose ssh port
 EXPOSE 22
