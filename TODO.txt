@@ -1,0 +1,3 @@
+- Player management (e.g. multi-tenant)
+- More robust player login script
+- COPY command to copy over some scripts (e.g. start-angband.sh) to make Dockerfile neater
