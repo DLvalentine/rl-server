@@ -1,3 +1,5 @@
+############################# Base Setup ############################################
+
 # Base image Debian and workdir for server-wide scripts
 FROM debian:stable-slim
 WORKDIR /rl-server
@@ -26,12 +28,15 @@ RUN echo "export LANG=en_US.UTF-8" > /etc/profile.d/lang_export.sh && \
 
 # Setup an alias for the play.sh script (all users)
 RUN echo "alias play='/home/player/play.sh'" >> /etc/profile.d/play_alias.sh
+RUN echo "alias p='play'" >> /etc/profile.d/play_alias.sh
 
 # Install curses
 RUN apt-get update && \
     apt-get install -y \
     libncurses5-dev \
     libncursesw5-dev
+
+############################# Games Setup ############################################
 
 # Install angband, create startup script for it
 RUN echo "deb http://deb.debian.org/debian stable main" > /etc/apt/sources.list.d/stable.list && \
@@ -54,6 +59,8 @@ RUN apt-get install -y cataclysm-dda-curses
 RUN echo "#!/bin/bash\n /usr/games/cataclysm" > /rl-server/start-cataclysm.sh && \
     chmod +x /rl-server/start-cataclysm.sh
 
+############################# User Setup ############################################
+
 # Setup default player account, ssh settings, and login scripts
 RUN useradd -m -s /bin/bash player
 
@@ -67,6 +74,8 @@ RUN chmod +x /home/player/play.sh
 
 RUN echo "source /etc/profile.d/lang_export.sh" >> /etc/profile
 RUN echo "source /etc/profile.d/play_alias.sh" >> /etc/profile
+
+############################# CMDs ############################################
 
 # Expose ssh port
 EXPOSE 22
