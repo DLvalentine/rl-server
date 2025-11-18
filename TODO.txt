@@ -1,2 +1,1 @@
 - Player management / menus
-- Move inline scripts into /scripts, maybe. Like a game setup script for example, to setup all of em

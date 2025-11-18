@@ -26,8 +26,11 @@ ENV LC_ALL=en_US.UTF-8
 RUN echo "export LANG=en_US.UTF-8" > /etc/profile.d/lang_export.sh && \
     echo "export LC_ALL=en_US.UTF-8" >> /etc/profile.d/lang_export.sh
 
-# Setup an alias for the play.sh script (all users)
-RUN echo "alias play='/home/player/play.sh'" >> /etc/profile.d/play_alias.sh
+# Setup an alias for the play.sh script once copied (all users)
+COPY scripts/play.sh /rl-server/play.sh
+RUN chmod +x /rl-server/play.sh
+
+RUN echo "alias play='/rl-server/play.sh'" >> /etc/profile.d/play_alias.sh
 RUN echo "alias p='play'" >> /etc/profile.d/play_alias.sh
 
 # Set MOTD (all users)
@@ -71,9 +74,6 @@ RUN echo "player:player" | chpasswd
 
 RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication yes/" /etc/ssh/sshd_config && \
 sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin no/" /etc/ssh/sshd_config
-
-COPY scripts/play.sh /home/player/play.sh
-RUN chmod +x /home/player/play.sh
 
 RUN echo "source /etc/profile.d/lang_export.sh" >> /etc/profile
 RUN echo "source /etc/profile.d/play_alias.sh" >> /etc/profile
