@@ -1,4 +1,4 @@
 echo OFF
 cls
-echo Building rlserver...
-docker build -t rlserver .
+echo Building rl-server...
+docker build -t rl-server .

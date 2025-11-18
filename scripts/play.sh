@@ -7,6 +7,6 @@ elif [ "$1" = "crawl" ] || [ "$1" = "c" ]; then
 elif [ "$1" = "cataclysm" ] || [ "$1" = "y" ]; then
     /rl-server/start-cataclysm.sh
 else
-    echo "Usage: play.sh [(a)ngband|(c)rawl|catacl(y)sm]"
+    echo "Usage: play [(a)ngband|(c)rawl|catacl(y)sm]"
     exit 1
 fi

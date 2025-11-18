@@ -1,3 +1,3 @@
 echo OFF
 cls
-docker exec -it rlserver /bin/bash
+docker exec -it rl-server /bin/bash
