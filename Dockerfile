@@ -13,7 +13,6 @@ RUN apt-get update && \
     apt-get install -y \
     locales \
     locales-all \
-    man-db \
     less \
     nano \
     cron \
