@@ -73,8 +73,11 @@ RUN echo "deb http://deb.debian.org/debian stable main" > /etc/apt/sources.list.
 # Install crawl
 RUN apt-get install -y crawl
 
-# Install cdda, create startup script for it
+# Install cdda
 RUN apt-get install -y cataclysm-dda-curses
+
+# Install nethack
+RUN apt-get install -y nethack-console
 
 ############################# User Setup ############################################
 

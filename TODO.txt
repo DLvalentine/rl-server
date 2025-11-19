@@ -1,2 +1,3 @@
-- RLs to add: nethack, rogue
+- Think about more RLs to add
 - Look into self-service or more automated user registration
+- Other features, like tmux/screen, chat, global leaderboards, etc.
