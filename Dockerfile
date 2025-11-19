@@ -44,26 +44,17 @@ RUN apt-get update && \
     libncurses5-dev \
     libncursesw5-dev
 
-# Install angband, create startup script for it
+# Install angband
 RUN echo "deb http://deb.debian.org/debian stable main" > /etc/apt/sources.list.d/stable.list && \
     apt-get update && \
     apt-get install -y \
     angband
 
-RUN echo "#!/bin/bash\n /usr/games/angband -mgcu" > /rl-server/start-angband.sh && \
-    chmod +x /rl-server/start-angband.sh
-
-# Install crawl, create startup script for it
+# Install crawl
 RUN apt-get install -y crawl
-
-RUN echo "#!/bin/bash\n /usr/games/crawl" > /rl-server/start-crawl.sh && \
-    chmod +x /rl-server/start-crawl.sh
 
 # Install cdda, create startup script for it
 RUN apt-get install -y cataclysm-dda-curses
-
-RUN echo "#!/bin/bash\n /usr/games/cataclysm" > /rl-server/start-cataclysm.sh && \
-    chmod +x /rl-server/start-cataclysm.sh
 
 ############################# User Setup ############################################
 
