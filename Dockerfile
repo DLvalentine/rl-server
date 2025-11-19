@@ -14,6 +14,7 @@ RUN apt-get update && \
 apt-get install -y \
 dos2unix \
 e2fsprogs \
+wget \
 locales \
 locales-all \
 less \
