@@ -4,6 +4,10 @@
 FROM debian:stable-slim
 WORKDIR /rl-server
 
+# Setup the users file
+RUN touch /rl-server/users
+RUN chmod 666 /rl-server/users
+
 # Install general updates and common packages
 RUN apt-get update && \
     apt-get install -y \
@@ -32,6 +36,17 @@ RUN chmod +x /rl-server/play.sh
 
 RUN echo "alias play='/rl-server/play.sh'" >> /etc/profile.d/play_alias.sh
 RUN echo "alias p='play'" >> /etc/profile.d/play_alias.sh
+
+# Setup an alias for the register.sh script once copied (all users)
+COPY scripts/register.sh /rl-server/register.sh
+RUN chmod +x /rl-server/register.sh
+
+RUN echo "alias register='/rl-server/register.sh'" >> /etc/profile.d/register_alias.sh
+RUN echo "alias r='register'" >> /etc/profile.d/register_alias.sh
+
+# Copy over add-user script for admin use
+COPY scripts/add-user.sh /rl-server/add-user.sh
+RUN chmod +x /rl-server/add-user.sh
 
 # Set MOTD (all users)
 COPY etc/motd.txt /etc/motd
@@ -68,6 +83,12 @@ sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin no/" /etc/ssh/sshd_c
 
 RUN echo "source /etc/profile.d/lang_export.sh" >> /etc/profile
 RUN echo "source /etc/profile.d/play_alias.sh" >> /etc/profile
+RUN echo "source /etc/profile.d/register_alias.sh" >> /etc/profile
+
+# Copy motd into each user's home dir as a README file, just in case they need it!
+RUN for dir in /home/*; do \
+        cp /etc/motd "$dir/README.txt"; \
+    done
 
 ############################# CMDs ############################################
 

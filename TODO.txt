@@ -1,1 +1,1 @@
-- Player management / menus
+- Better user management. It's very manual and kinda... janky lol

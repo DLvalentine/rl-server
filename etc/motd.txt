@@ -3,13 +3,23 @@
 # Welcome to rl-server! #
 ---------------------------------------------------------------------------------------------------
 
-Use `play` to play one of the available roguelikes!
+Use `play` to play one of the available roguelikes:
 
 Example:
     $ play angband
 
 Run `play` without any arguments to see a full list of supported roguelikes.
 
-Coming soon: `register` - a command to register as a user of rl-server. Protect your savegames!
+Use `register` to register a username/email with rl-server:
+
+Example:
+    $ register
+
+`player` is the default user, and without registering, you run the risk of losing your savegames
+or having them hijacked!
+
+Protect your savegame today! Register!
+
+GLHF!
 
 ---------------------------------------------------------------------------------------------------

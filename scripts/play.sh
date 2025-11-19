@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 
 if [ "$1" = "angband" ] || [ "$1" = "a" ]; then
     /usr/games/angband -mgcu
