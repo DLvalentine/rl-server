@@ -3,22 +3,24 @@
 # Base image Debian and workdir for server-wide scripts
 FROM debian:stable-slim
 WORKDIR /rl-server
+RUN chmod 755 /rl-server
 
-# Setup the users file
+# Setup the users file -> rw for root, write only for everyone else.
 RUN touch /rl-server/users
-RUN chmod 666 /rl-server/users
+RUN chmod 622 /rl-server/users
 
 # Install general updates and common packages
 RUN apt-get update && \
-    apt-get install -y \
-    dos2unix \
-    locales \
-    locales-all \
-    less \
-    nano \
-    cron \
-    systemd-sysv \
-    openssh-server
+apt-get install -y \
+dos2unix \
+e2fsprogs \
+locales \
+locales-all \
+less \
+nano \
+cron \
+systemd-sysv \
+openssh-server
 
 # Set UTF-8 as default locale (system/root)
 RUN sed -i "s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/" /etc/locale.gen && \
@@ -97,6 +99,6 @@ RUN for dir in /home/*; do \
 
 # Expose ssh port
 EXPOSE 22
-    
-# When the container starts, startup sshd
-CMD ["/usr/sbin/sshd", "-D"]
+
+# When the container starts, startup sshd and then make the users file append-only (can only be done during run)
+CMD ["sh", "-c", "exec /usr/sbin/sshd -D && chattr +a /rl-server/users"]
