@@ -1,3 +1,4 @@
+#!/bin/bash
 clear
 
 echo "Creating user '$1' with password '$2'..."

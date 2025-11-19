@@ -11,6 +11,7 @@ RUN chmod 666 /rl-server/users
 # Install general updates and common packages
 RUN apt-get update && \
     apt-get install -y \
+    dos2unix \
     locales \
     locales-all \
     less \
@@ -31,6 +32,7 @@ RUN echo "export LANG=en_US.UTF-8" > /etc/profile.d/lang_export.sh && \
 
 # Setup an alias for the play.sh script once copied (all users)
 COPY scripts/play.sh /rl-server/play.sh
+RUN dos2unix /rl-server/play.sh
 RUN chmod +x /rl-server/play.sh
 
 RUN echo "alias play='/rl-server/play.sh'" >> /etc/profile.d/play_alias.sh
@@ -38,6 +40,7 @@ RUN echo "alias p='play'" >> /etc/profile.d/play_alias.sh
 
 # Setup an alias for the register.sh script once copied (all users)
 COPY scripts/register.sh /rl-server/register.sh
+RUN dos2unix /rl-server/register.sh
 RUN chmod +x /rl-server/register.sh
 
 RUN echo "alias register='/rl-server/register.sh'" >> /etc/profile.d/register_alias.sh
@@ -45,6 +48,7 @@ RUN echo "alias r='register'" >> /etc/profile.d/register_alias.sh
 
 # Copy over add-user script for admin use
 COPY scripts/add-user.sh /rl-server/add-user.sh
+RUN dos2unix /rl-server/add-user.sh
 RUN chmod +x /rl-server/add-user.sh
 
 # Set MOTD (all users)
