@@ -1,1 +1,2 @@
 - Better user management. It's very manual and kinda... janky lol
+- Security: instead of appending users, dump username as file with contents being the email. That way it is write protected. Then update admin scripts
