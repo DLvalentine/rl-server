@@ -1,5 +1,4 @@
-- RLs to add: [brogueCE]
-    - brogueCE: may need to wget from releases: https://github.com/tmewett/BrogueCE/releases -> it isn't in a debian repo anywhere
-    - brogueCE: may need SDL, too
 - Look into self-service or more automated user registration
+    - could use a cron job
 - Other features, like tmux/screen, chat, global leaderboards, etc.
+- Think about other RLs to install
