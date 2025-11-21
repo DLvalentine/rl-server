@@ -2,3 +2,8 @@
     - could use a cron job
 - Other features, like tmux/screen, chat, global leaderboards, etc.
 - Think about other RLs to install
+    - DoomRL / AliensRL
+    - KeeperRL
+    - Omega
+    - HyperRogue
+    - Infra Arcana
