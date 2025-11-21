@@ -7,3 +7,4 @@
     - Omega
     - HyperRogue
     - Infra Arcana
+- Optimization: at end of build, cleanup tmp files and uninstall unnecessary packages to save space
