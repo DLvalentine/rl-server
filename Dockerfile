@@ -15,6 +15,7 @@ apt-get install -y \
 dos2unix \
 e2fsprogs \
 wget \
+git \
 locales \
 locales-all \
 less \
