@@ -1,10 +1,8 @@
 - Look into self-service or more automated user registration
     - could use a cron job
 - Other features, like tmux/screen, chat, global leaderboards, etc.
-- Think about other RLs to install
+- Think about other RLs to install - here's some ideas:
     - DoomRL / AliensRL
-    - KeeperRL
-    - Omega
     - HyperRogue
     - Infra Arcana
 - Optimization: at end of build, cleanup tmp files and uninstall unnecessary packages to save space
